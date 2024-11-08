@@ -11,14 +11,19 @@ new p5((p) => {
   };
 
   p.setup = function () {
+    p.pixelDensity(1);
     canvas = p.createCanvas(p.windowWidth, p.windowHeight);
     canvas.position(0, 0);
     canvas.style('z-index', '-2');
+    canvas.style('position', 'fixed');
+    canvas.style('top', '0');
 
     for (let i = 0; i < 10; ++i) {
       let v;
       let too_close = true;
-      while (too_close) {
+      let close_count = 0;
+      while (too_close && close_count < 50) {
+        close_count++;
         too_close = false;
         v = p.createVector(
           p.random(p.width * 0.1, p.width * 0.9),
@@ -45,12 +50,14 @@ new p5((p) => {
   };
 
   p.draw = function () {
-    // p.background(248, 99, 237);
-    p.noStroke();
-    p.fill(248, 99, 237, 10);
-    p.rect(p.width / 2, p.height / 2, p.width, p.height);
+    p.background(248, 99, 237);
+
     let mouse_vector = p.createVector(p.mouseX, p.mouseY);
+
+    p.noFill();
+
     p.strokeWeight(3);
+    // make size of soot img smaller if screen is smaller
     soots.forEach((soot) => {
       p.image(img, soot.x, soot.y);
     });
@@ -84,13 +91,6 @@ new p5((p) => {
       p.circle(iris_vector.x, iris_vector.y, iris_size);
       p.resetMatrix();
     });
-  };
-
-  p.mouseDragged = () => {
-    p.stroke(0);
-    p.strokeWeight(3);
-    p.line(p.pmouseX, p.pmouseY, p.mouseX, p.mouseY);
-    // p.point(p.mouseX, p.mouseY);
   };
 
   p.windowResized = () => {

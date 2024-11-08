@@ -1,0 +1,29 @@
+.container > img {
+  width: 7em;
+  height: 7em;
+  background-color: black;
+  display: block;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.flex-container {
+  padding: 5em 5em;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+.flex-container > div {
+  margin: 30px;
+  font-size: 40px;
+  color: black;
+  z-index: 0;
+}
+
+.flex-container > div :hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
